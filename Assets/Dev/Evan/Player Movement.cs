@@ -1,68 +1,112 @@
-using System;
 using UnityEngine;
 
-public class PlayerMouvement : MonoBehaviour
+namespace Dev.Evan
 {
-    public CharacterController controller;
+    public class PlayerMouvement : MonoBehaviour
+    {
  
-    public Transform orientation;
+        [Header("Movement")]
+        public float moveSpeed;
+        public float groundDrag;
+        public float jumpForce;
+        public float jumpCd;
+        public float airMultiplier;
+        bool _readyToJump = true;
     
-    float horizontalInput;
-    float verticalInput;
+        [Header("Keybinds")]
+        public KeyCode jumpKey = KeyCode.Space;
     
-    public float moveSpeed = 12f;
-    public float gravity = -9.81f * 2;
-    public float jumpHeight = 3f;
+        [Header("Ground Check")]
+        public float playerHeight;
+        public LayerMask whatIsGround;
+        bool _isGrounded;
+    
+        public Transform orientation;
+    
+        float _horizontalInput;
+        float _verticalInput;
  
-    Vector3 MoveDirection;
+        Vector3 _moveDirection;
 
-    private Rigidbody rb;
+        private Rigidbody _rb;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = false;
-    }
-
-    private void Update()
-    {
-        MyInput();
-    }
-
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-    }
-
-    private void MovePlayer()
-    {
-        MoveDirection = new Vector3(horizontalInput, 0, verticalInput);
-        rb.AddForce(MoveDirection.normalized * moveSpeed * , ForceMode.Impulse);
-    }
-    // Update is called once per frame
-   /* void Update()
-    {
-        
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        
-        Debug.Log(x + "  -  " + z);
- 
-        //right is the red Axis, foward is the blue axis
-        Vector3 move = transform.right * x + transform.forward * z;
- 
-        controller.Move(move * (moveSpeed * Time.deltaTime));
- 
-        //check if the player is on the ground so he can jump
-        if (Input.GetButtonDown("Jump"))
+        private void Start()
         {
-            //the equation for jumping
-            MoveDirection.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            _rb = GetComponent<Rigidbody>();
+            _rb.freezeRotation = true;
         }
- 
-        MoveDirection.y += gravity * Time.deltaTime;
- 
-        controller.Move(MoveDirection * Time.deltaTime);
-    }  */
+
+        private void Update()
+        {
+            //Ground check
+            _isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        
+            MyInput();
+            SpeedControl();
+            //Handle drag
+            if(_isGrounded)
+                _rb.linearDamping = groundDrag;
+            else
+                _rb.linearDamping = 0;
+        
+        }
+
+        private void FixedUpdate()
+        {
+            MovePlayer();
+        }
+    
+        private void MyInput()
+        {
+            _horizontalInput = Input.GetAxisRaw("Horizontal");
+            _verticalInput = Input.GetAxisRaw("Vertical");
+        
+            //When to jump
+            if (Input.GetKeyDown(jumpKey) && _readyToJump && _isGrounded)
+            {
+                _readyToJump = false;
+                Jump();
+                Invoke(nameof(ResetJump), jumpCd);
+            }
+        }
+
+        private void MovePlayer()
+        {
+            //Calculate movement direction
+            _moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
+        
+            //On ground
+            if (_isGrounded)
+                _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
+        
+            //In air
+            else if (!_isGrounded)
+                _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+        }
+
+        private void SpeedControl()
+        {
+            Vector3 flatVel = new Vector3(_rb.linearVelocity.x, 0f , _rb.linearVelocity.z);
+        
+            //limit velocity if needed
+            if (flatVel.magnitude > moveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
+            }
+        }
+
+        private void Jump()
+        {
+            //Reset y velocity
+            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+        
+            _rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+
+        private void ResetJump()
+        {
+            _readyToJump = true;
+        }
+    }
 }
