@@ -11,7 +11,6 @@ public class CamController : MonoBehaviour
 
 	public Vector3 minPos, maxPos;
 
-    // Update is called once per frame
     void LateUpdate()
     {
 	    if (transform.position != player.position)

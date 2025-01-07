@@ -12,7 +12,7 @@ public class CamTrigger : MonoBehaviour
         camControl = Camera.main.GetComponent<CamController>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
         {
