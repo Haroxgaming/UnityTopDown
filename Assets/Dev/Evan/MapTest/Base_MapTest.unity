@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 218251332}
   - component: {fileID: 218251339}
   - component: {fileID: 218251336}
-  - component: {fileID: 218251338}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -183,20 +182,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &218251338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218251330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5cfa9e5195fd7545981d0029edbd8f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 400
-  orientation: {fileID: 1919588087}
 --- !u!114 &218251339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   groundDrag: 5
-  jumpForce: 20
-  jumpCd: 0.25
+  jumpForce: 12
+  jumpCd: 0.75
   airMultiplier: 0.2
   jumpKey: 32
   playerHeight: 2
