@@ -14,7 +14,10 @@ public class CamTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            
+            camControl.minPos += newCamPos;
+            camControl.maxPos += newCamPos;
+
+            other.transform.position += newPlayerPos;
         }
     }
 }
