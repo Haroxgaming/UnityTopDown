@@ -66,8 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f586b4f7d9ccb8f4bb29e9f0005126c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCamPos: {x: 0, y: 0, z: -10}
-  newPlayerPos: {x: 0, y: 0, z: -2}
+  newCamPos: {x: 0, y: 0, z: -20}
+  newPlayerPos: {x: 0, y: 0, z: -4}
 --- !u!1 &5870080049833885820
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 5, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 628697000208953925}
@@ -167,5 +167,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f586b4f7d9ccb8f4bb29e9f0005126c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCamPos: {x: 0, y: 0, z: 10}
-  newPlayerPos: {x: 0, y: 0, z: 2}
+  newCamPos: {x: 0, y: 0, z: 20}
+  newPlayerPos: {x: 0, y: 0, z: 4}
