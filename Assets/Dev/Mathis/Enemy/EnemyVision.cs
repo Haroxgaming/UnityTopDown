@@ -39,17 +39,19 @@ public class EnemyVision : MonoBehaviour
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, (Player.transform.position - transform.position), out hit,
-                Mathf.Infinity))
+        if (Physics.Raycast(transform.position, (Player.transform.position - transform.position), out hit, Mathf.Infinity))
         {
-            isNotHidden = true;
-            HiddenText.text = "Not Hidden";
-            HiddenText.color = Color.red;
-        }
-        else
-        {
-            HiddenText.text = "Hidden";
-            HiddenText.color = Color.green;
+            if (hit.transform == Player.transform)
+            {
+                isNotHidden = true;
+                HiddenText.text = "Not Hidden";
+                HiddenText.color = Color.red;
+            }
+            else
+            {
+                HiddenText.text = "Hidden";
+                HiddenText.color = Color.green;
+            }
         }
 
         Vector3 side1 = Player.transform.position - transform.position;

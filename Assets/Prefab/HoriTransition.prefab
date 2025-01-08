@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5850013135564760744}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HoriTransition
-  m_TagString: Untagged
+  m_TagString: TriggerBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6760025248714347409}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6760025248714347409}
   - component: {fileID: 4188492100093659805}
   - component: {fileID: 4930095430305915499}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 1139988604696747123}
   - component: {fileID: 1410489655268598930}
   - component: {fileID: 5910022829084656260}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

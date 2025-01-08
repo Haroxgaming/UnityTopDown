@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3029845607265037949}
   - component: {fileID: 7675173594366745321}
   - component: {fileID: 7643569839188856316}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,9 +77,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3275041408729221349}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VertTransition
-  m_TagString: Untagged
+  m_TagString: TriggerBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 628697000208953925}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 628697000208953925}
   - component: {fileID: 5970062232266313810}
   - component: {fileID: 8497351107578642413}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
