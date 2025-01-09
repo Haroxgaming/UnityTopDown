@@ -1,32 +1,34 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class CamMouvement : MonoBehaviour
+namespace Dev.Evan.Scripts
 {
-    public float mouseSensitivity = 100f;
-    
-    float xRotation = 0f;
-    float yRotation = 0f;
-    
-    public Transform orientation;
- 
-    private void Start()
+    public class CamMouvement : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        public float mouseSensitivity = 100f;
+    
+        float _xRotation;
+        float _yRotation;
+    
+        public Transform orientation;
  
-    private void Update()
-    {
-        float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        
-        xRotation -= mouseY;
-        yRotation += mouseX;
-        
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
  
+        private void Update()
+        {
+            float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        
+            _xRotation -= mouseY;
+            _yRotation += mouseX;
+        
+            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+            transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0f);
+            orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
+ 
+        }
     }
 }
