@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 _moveDirection;
 
     private Rigidbody _rb;
-    public Vector3 RespawnTransform; 
+    Vector3 RespawnTransform; 
 
     private void Start()
     {
@@ -108,8 +108,13 @@ public class PlayerMovement : MonoBehaviour
         _readyToJump = true;
     }
 
-    void Respawn()
+    public void Respawn()
     {
         transform.position = RespawnTransform;
+    }
+
+	public void setRespawnTransform()
+    {
+        RespawnTransform = transform.position;
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 public class Respawn : MonoBehaviour
 {
     public PlayerMovement player;
-    void OnCollisionEnter(Collision other)
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            player.RespawnTransform = transform.position;
+            player.setRespawnTransform();
         }
     }
 }

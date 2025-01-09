@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 using TMPro;
 
 public class AIControler : MonoBehaviour
@@ -259,11 +258,9 @@ public class AIControler : MonoBehaviour
     
     void OnCollisionEnter(Collision other)
     {
-        Console.Write("Coucou");
         if (other.gameObject.tag == "Player")
         {
-            
-            player.transform.position = player.RespawnTransform;
+            player.Respawn();
         }
     }
 }
