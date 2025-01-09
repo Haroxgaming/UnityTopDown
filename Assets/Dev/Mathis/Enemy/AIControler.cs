@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 using TMPro;
 
 public class AIControler : MonoBehaviour
@@ -32,9 +33,11 @@ public class AIControler : MonoBehaviour
     
     public float DetectRange = 10;
     public float DetectAngle = 45;
-    private bool isInAngle, isInRange, isNotHidden;
+    private bool isInAngle, isInRange, isNotHidden, isDetected;
     public GameObject Player;
     public TMP_Text RangeText, HiddenText, AngleText, DetectedText;
+    
+    public PlayerMovement player;
 
     void Start()
     {
@@ -232,12 +235,35 @@ public class AIControler : MonoBehaviour
         {
             DetectedText.text = "Player Detected";
             DetectedText.color = Color.red;
+            m_PlayerPosition = Player.transform.position;
+            m_IsPatrol = false;
+            isDetected = true;
+
+        }
+        else if (isDetected && Vector3.Distance(transform.position, Player.transform.position) < (DetectRange -4))
+        {
+            DetectedText.text = "Player Detected";
+            DetectedText.color = Color.red;
+            m_PlayerPosition = Player.transform.position;
+            m_IsPatrol = false;
+            isDetected = true;
         }
         else
         {
             DetectedText.text = "Player Not Detected";
             DetectedText.color = Color.green;
-            m_PlayerPosition = Player.transform.position;
+            m_IsPatrol = true;
+            isDetected = false;
+        }
+    }
+    
+    void OnCollisionEnter(Collision other)
+    {
+        Console.Write("Coucou");
+        if (other.gameObject.tag == "Player")
+        {
+            
+            player.transform.position = player.RespawnTransform;
         }
     }
 }
