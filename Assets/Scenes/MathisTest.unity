@@ -3167,8 +3167,28 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3819446167063124366, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
+      propertyPath: zone
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819446167063124366, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
+      propertyPath: haveLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819446167063124366, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
       propertyPath: moveSpeed
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819446167063124366, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
+      propertyPath: groundDrag
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819446167063124366, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
+      propertyPath: haveJetpack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4261096567486412335, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4261096567486412335, guid: 9b7f3810588fb7e45849bcd4057af9fb, type: 3}
       propertyPath: m_IsKinematic

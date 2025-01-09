@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool _isGrounded;
 
+    public bool haveLight; 
+    public bool haveJetpack = true;
+    public int zone = 3;
     public Transform orientation;
 
     float _horizontalInput;
@@ -37,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        useObject();
         //Ground check
         _isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
     
@@ -116,5 +120,36 @@ public class PlayerMovement : MonoBehaviour
 	public void setRespawnTransform()
     {
         RespawnTransform = transform.position;
+    }
+
+    private void useObject()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            switch (zone)
+            {
+                case 0:
+                    break;
+                case 1:
+                    //infiltration
+                    break;
+                case 2:
+                    if (haveLight)
+                    {
+                        
+                    }
+                    //FlashLight
+                    break;
+                case 3:
+                    if (haveJetpack)
+                    {
+                        
+                    }
+                    //JetPack
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
