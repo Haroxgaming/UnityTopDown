@@ -6,10 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float groundDrag;
-    public float jumpForce;
-    public float jumpCd;
     public float airMultiplier;
-    bool _readyToJump = true;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -26,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     float _horizontalInput;
     float _verticalInput;
-
+    float _FireInput;
     Vector3 _moveDirection;
 
     private Rigidbody _rb;
@@ -63,28 +60,36 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
-    
-        //When to jump
-        if (Input.GetKeyDown(jumpKey) && _readyToJump && _isGrounded)
-        {
-            _readyToJump = false;
-            Jump();
-            Invoke(nameof(ResetJump), jumpCd);
-        }
+        _FireInput = Input.GetAxisRaw("Fire1");
     }
 
     private void MovePlayer()
     {
-        //Calculate movement direction
-        _moveDirection = orientation.forward * _verticalInput + orientation.right * _horizontalInput;
-    
-        //On ground
-        if (_isGrounded)
-            _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f), ForceMode.Force);
-    
-        //In air
-        else if (!_isGrounded)
-            _rb.AddForce(_moveDirection.normalized * (moveSpeed * 10f * airMultiplier), ForceMode.Force);
+        if (_FireInput != 0 || _verticalInput != 0 || _horizontalInput != 0)
+        {
+            switch (zone)
+            {
+                case 0:
+                    _moveDirection.Set(_verticalInput, 0, _horizontalInput);
+                    _rb.linearVelocity = _moveDirection * moveSpeed;
+                    break;
+                case 1:
+                    _moveDirection.Set(_verticalInput, 0, _horizontalInput);
+                    _rb.linearVelocity = _moveDirection * moveSpeed;
+                    break;
+                case 2: 
+                    _moveDirection.Set(_verticalInput, 0, _horizontalInput);
+                    _rb.linearVelocity = _moveDirection * moveSpeed;
+                    break;
+                case 3:
+                    if (haveJetpack)
+                    {
+                        _moveDirection.Set(_verticalInput, _FireInput, _horizontalInput);
+                        _rb.linearVelocity = _moveDirection * moveSpeed;
+                    }
+                    break;
+            }
+        }
     }
 
     private void SpeedControl()
@@ -98,20 +103,7 @@ public class PlayerMovement : MonoBehaviour
             _rb.linearVelocity = new Vector3(limitedVel.x, _rb.linearVelocity.y, limitedVel.z);
         }
     }
-
-    private void Jump()
-    {
-        //Reset y velocity
-        _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
     
-        _rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-    }
-
-    private void ResetJump()
-    {
-        _readyToJump = true;
-    }
-
     public void Respawn()
     {
         transform.position = RespawnTransform;
@@ -141,11 +133,6 @@ public class PlayerMovement : MonoBehaviour
                     //FlashLight
                     break;
                 case 3:
-                    if (haveJetpack)
-                    {
-                        
-                    }
-                    //JetPack
                     break;
                 default:
                     break;
