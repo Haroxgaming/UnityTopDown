@@ -16,9 +16,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool _isGrounded;
 
-    public bool haveLight; 
-    public bool haveJetpack = true;
-    public int zone = 3;
+    public bool haveLight;
+    private bool flashLightActivated;
+    public bool haveJetpack;
+    public int zone;
     public Transform orientation;
 
     float _horizontalInput;
@@ -82,9 +83,22 @@ public class PlayerMovement : MonoBehaviour
                     _rb.linearVelocity = _moveDirection * moveSpeed;
                     break;
                 case 3:
-                    if (haveJetpack)
+                    if (haveJetpack && _FireInput != 0)
                     {
                         _moveDirection.Set(_verticalInput, _FireInput, _horizontalInput);
+                        _rb.linearVelocity = _moveDirection * moveSpeed;
+                        var pos = transform.position;
+                        pos.y =  Mathf.Clamp(transform.position.y, -20.0f, 4.0f);
+                        transform.position = pos;
+                    }
+                    else if (transform.position.y < 1.7f)
+                    {
+                        _moveDirection.Set(_verticalInput, 0, _horizontalInput);
+                        _rb.linearVelocity = _moveDirection * moveSpeed;
+                    }
+                    else
+                    {
+                        _moveDirection.Set(_verticalInput, -1, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
                     }
                     break;
@@ -128,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
                 case 2:
                     if (haveLight)
                     {
-                        
+                        flashLightActivated = true;
                     }
                     //FlashLight
                     break;
