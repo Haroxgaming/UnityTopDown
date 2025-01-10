@@ -5596,10 +5596,10 @@ RectTransform:
   - {fileID: 1934271148}
   m_Father: {fileID: 47394363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 560, y: -265}
-  m_SizeDelta: {x: -1780, y: -800}
+  m_SizeDelta: {x: 140, y: 88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1791485298
 MonoBehaviour:
@@ -6664,7 +6664,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1585794356}
         m_TargetAssemblyTypeName: Dev.Evan.Scripts.SettingsMenu, Assembly-CSharp
-        m_MethodName: SetQuality
+        m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
+
 
 namespace Dev.Evan.Scripts
 {
@@ -15,16 +15,42 @@ namespace Dev.Evan.Scripts
 
         void Start()
         {
-            _resolutions = Screen.resolutions;
-            resolutionDropdown.ClearOptions();
+            _resolutions = Screen.resolutions; // Récupère les résolutions disponibles
+            resolutionDropdown.ClearOptions(); // Efface les options du Dropdown
             List<string> options = new List<string>();
 
+            int currentResolutionIndex = -1;
+
+            // Ajoute les résolutions au menu déroulant
             for (int i = 0; i < _resolutions.Length; i++)
             {
                 string option = _resolutions[i].width + " x " + _resolutions[i].height;
                 options.Add(option);
+
+                // Compare la résolution actuelle
+                if (_resolutions[i].width == Screen.width &&
+                    _resolutions[i].height == Screen.height &&
+                    _resolutions[i].refreshRateRatio.Equals(Screen.currentResolution.refreshRateRatio))
+                {
+                    currentResolutionIndex = i;
+                }
             }
+
+            // Ajoute les options au Dropdown
             resolutionDropdown.AddOptions(options);
+
+            // Définit la résolution actuelle
+            if (currentResolutionIndex != -1)
+            {
+                resolutionDropdown.value = currentResolutionIndex; // Sélectionne l'option correcte
+            }
+            else
+            {
+                resolutionDropdown.value = 0; // Par défaut, sélectionne la première option
+            }
+            
+            // Actualise l'affichage du menu déroulant
+            resolutionDropdown.RefreshShownValue();
         }
     
         public void SetVolume(float volume)
@@ -36,6 +62,11 @@ namespace Dev.Evan.Scripts
         {
             QualitySettings.SetQualityLevel(qualityIndex);
         }
-        
+
+        public void SetResolution(int resolutionIndex)
+        {
+            Resolution resolution = _resolutions[resolutionIndex];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }
     }
 }
