@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
     bool _isGrounded;
 
     public bool haveLight;
-    private bool flashLightActivated;
+    private bool flashLightActivated = false;
+    public GameObject light;
     public bool haveJetpack;
     public int zone;
     public Transform orientation;
@@ -142,7 +143,16 @@ public class PlayerMovement : MonoBehaviour
                 case 2:
                     if (haveLight)
                     {
-                        flashLightActivated = true;
+                        if (!flashLightActivated) 
+                        { 
+                            flashLightActivated = true;
+                            light.SetActive(false); 
+                        }
+                        else 
+                        { 
+                            flashLightActivated = false;
+                            light.SetActive(true); 
+                        }
                     }
                     //FlashLight
                     break;
