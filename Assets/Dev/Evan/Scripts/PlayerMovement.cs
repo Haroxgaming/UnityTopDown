@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
 
     [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode PauseKey = KeyCode.Escape;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject light;
     public bool haveJetpack;
     public int zone;
+    private bool _pauseBool;
     public Transform orientation;
 
     float _horizontalInput;
@@ -129,6 +131,28 @@ public class PlayerMovement : MonoBehaviour
         RespawnTransform = transform.position;
     }
 
+    private void pauseGame()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            switch (_pauseBool)
+            {
+                case true:
+                    Time.timeScale = 0;
+                    gameObject.GameObject();
+                    gameObject.SetActive(true);
+                    break;
+
+                case false:
+                    Time.timeScale = 1;
+                    gameObject.GameObject();
+                    gameObject.SetActive(true);
+                    break;
+            }
+
+        }
+    }
+    
     private void useObject()
     {
         if (Input.GetButtonDown("Fire1"))
