@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Dev/Evan/UI/MainMenu.unity
+    path: Assets/Dev/Evan/UI/Map_MainMenu.unity
     guid: 81b88072420a6a748a5b81c9ff2f41dd
   - enabled: 1
     path: Assets/Dev/Evan/MapTest/Base_MapTest.unity
