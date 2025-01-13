@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class Door : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Door : MonoBehaviour
     {
         activation = true;
     }
-
+    
     void Update()
     {
         if (transform.position != player.position && activation)
