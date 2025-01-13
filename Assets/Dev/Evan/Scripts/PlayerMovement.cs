@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
 
     [Header("Keybinds")]
-    public KeyCode PauseKey = KeyCode.Escape;
+    public GameObject pausePanel;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -27,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     float _horizontalInput;
     float _verticalInput;
-    float _FireInput;
+    float _fireInput;
+    float _pauseInput;
     Vector3 _moveDirection;
 
     private Rigidbody _rb;
@@ -35,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
     }
@@ -42,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         useObject();
+        pauseGame();
         //Ground check
         _isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
     
@@ -64,12 +69,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
-        _FireInput = Input.GetAxisRaw("Fire1");
+        _fireInput = Input.GetAxisRaw("Fire1");
+        _pauseInput = Input.GetAxisRaw("Escape");
+        
     }
 
     private void MovePlayer()
     {
-        if (_FireInput != 0 || _verticalInput != 0 || _horizontalInput != 0)
+        if (_fireInput != 0 || _verticalInput != 0 || _horizontalInput != 0)
         {
             switch (zone)
             {
@@ -86,9 +93,9 @@ public class PlayerMovement : MonoBehaviour
                     _rb.linearVelocity = _moveDirection * moveSpeed;
                     break;
                 case 3:
-                    if (haveJetpack && _FireInput != 0)
+                    if (haveJetpack && _fireInput != 0)
                     {
-                        _moveDirection.Set(_verticalInput, _FireInput, _horizontalInput);
+                        _moveDirection.Set(_verticalInput, _fireInput, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
                         var pos = transform.position;
                         pos.y =  Mathf.Clamp(transform.position.y, -20.0f, 4.0f);
@@ -133,22 +140,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void pauseGame()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Escape"))
         {
-            switch (_pauseBool)
-            {
-                case true:
-                    Time.timeScale = 0;
-                    gameObject.GameObject();
-                    gameObject.SetActive(true);
-                    break;
-
-                case false:
-                    Time.timeScale = 1;
-                    gameObject.GameObject();
-                    gameObject.SetActive(true);
-                    break;
-            }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
 
         }
     }
