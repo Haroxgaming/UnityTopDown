@@ -18,10 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool _isGrounded;
 
-    public bool haveLight;
+    public bool haveLight, haveJetpack, haveTelecommande, part1, part2, part3;
     private bool flashLightActivated = false;
     public GameObject light;
-    public bool haveJetpack;
     public int zone;
     private bool _pauseBool;
     public Transform orientation;
@@ -31,9 +30,13 @@ public class PlayerMovement : MonoBehaviour
     float _fireInput;
     float _pauseInput;
     Vector3 _moveDirection;
-
+    public LightSphere[] _Targets;
     private Rigidbody _rb;
     Vector3 RespawnTransform; 
+    
+    public float DetectRange = 10;
+    public float DetectAngle = 45;
+    private bool isInAngle, isInRange, isNotHidden;
 
     private void Start()
     {
@@ -175,13 +178,57 @@ public class PlayerMovement : MonoBehaviour
                             light.SetActive(true); 
                         }
                     }
-                    //FlashLight
                     break;
                 case 3:
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    /*void FlashlightDetect()
+    {
+        isInAngle = false;
+        isInRange = false;
+        isNotHidden = false;
+        foreach (LightSphere target in targets)
+        {
+            
+        }
+        if (Vector3.Distance(transform.position, target.transform.position) < DetectRange)
+        {
+            isInRange = true;
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (target.transform.position - transform.position), out hit, Mathf.Infinity))
+        {
+            if (hit.transform == target.transform)
+            {
+                isNotHidden = true;
+            }
+        }
+
+        Vector3 side1 = target.transform.position - transform.position;
+        Vector3 side2 = transform.forward;
+        float angle = Vector3.SignedAngle(side1, side2, Vector3.up);
+        if (angle < DetectAngle && angle > -1 * DetectAngle)
+        {
+            isInAngle = true;
+        }
+
+        if (isInAngle && isInRange && isNotHidden)
+        {
+            target.activation();
+        }
+    }*/
+    
+    public void win()
+    {
+        if (part1 && part3 && part2)
+        {
+            
         }
     }
 }

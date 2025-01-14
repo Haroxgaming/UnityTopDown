@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class ControlPanel : MonoBehaviour
 {
-    public Door[] linkedDoorsOpen;
-    public Door[] linkedDoorsClose;
+    public Door[] _linkedDoorsOpen;
+    public Door[] _linkedDoorsClose;
     public void activation()
     {
-        foreach (Door linkedDoorOpen in linkedDoorsOpen)
+        for (int i = 0; i < (_linkedDoorsOpen.Length - 1); i++)
         {
-            linkedDoorOpen.open();
+            _linkedDoorsOpen[i].open();
         }
-
-        foreach (Door linkedDoorClose in linkedDoorsClose)
+        for (int i = 0; i < (_linkedDoorsClose.Length - 1); i++)
         {
-            linkedDoorClose.close();
+            _linkedDoorsClose[i].close();
         }
     }
 }
