@@ -12,6 +12,8 @@ public class PausePanel : MonoBehaviour
 
     public void OnResume()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pausePanel.SetActive(false);
         Time.timeScale = 1;
     }
