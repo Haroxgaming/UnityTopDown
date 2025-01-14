@@ -3,43 +3,34 @@ using System;
 
 public class Door : MonoBehaviour
 {
-    public Transform player;
     public float smoothSpeed;
-
-    bool activation;
-
     private Vector3 targetPos, newPos;
     private Vector3 temp;
-
+    public bool activated;
     public Vector3 minPos, maxPos;
     public void open()
     {
-        activation = true;
-        temp = minPos;
-        minPos = maxPos;
-        maxPos = temp;
+        if (activated)
+        {
+            minPos = temp;
+            activated = false;
+        }
+        else
+        {
+            temp = minPos;
+            minPos = maxPos;
+            activated = true;
+        }
     }
-    public void close()
-    {
-        activation = true;
-        temp = minPos;
-        minPos = maxPos;
-        maxPos = temp;
-    }
-    
+
     void Update()
     {
-        if (transform.position != player.position && activation)
-        {
-            targetPos = player.position;
+        Vector3 camBoundaryPos = new Vector3(
+            Mathf.Clamp(targetPos.x, minPos.x, maxPos.x),
+            Mathf.Clamp(targetPos.y, minPos.y, maxPos.y),
+            Mathf.Clamp(targetPos.z, minPos.z, maxPos.z));
 
-            Vector3 camBoundaryPos = new Vector3(
-                Mathf.Clamp(targetPos.x, minPos.x, maxPos.x),
-                Mathf.Clamp(targetPos.y, minPos.y, maxPos.y),
-                Mathf.Clamp(targetPos.z, minPos.z, maxPos.z));
-
-            newPos = Vector3.Lerp(transform.position, camBoundaryPos, smoothSpeed);
-            transform.position = newPos;
-        }
+        newPos = Vector3.Lerp(transform.position, camBoundaryPos, smoothSpeed);
+        transform.position = newPos;
     }
 }

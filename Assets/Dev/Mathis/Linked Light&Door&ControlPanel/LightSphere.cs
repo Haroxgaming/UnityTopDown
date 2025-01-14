@@ -4,17 +4,17 @@ public class LightSphere : MonoBehaviour
 {
     public GameObject colorChange;
     public Door linkedDoor;
+    private bool activate;
 
-    public Material matDisable, matEnable;
+    public Material matEnable;
 
     public void activation()
     {
-        colorChange.GetComponent<Renderer>().material = matEnable;
-        linkedDoor.open();
-    }
-    
-    public void Disable()
-    {
-        colorChange.GetComponent<Renderer>().material = matDisable;
+        if (!activate)
+        {
+            colorChange.GetComponent<Renderer>().material = matEnable;
+            linkedDoor.open();
+            activate = true;
+        }
     }
 }

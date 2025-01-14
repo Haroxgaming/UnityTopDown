@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
     float _fireInput;
     float _pauseInput;
     Vector3 _moveDirection;
-    public LightSphere[] _Targets;
+    public LightSphere[] _TargetsSphere;
+    public ControlPanel[] _TargetsPanel;
     private Rigidbody _rb;
     Vector3 RespawnTransform; 
     
@@ -55,12 +57,10 @@ public class PlayerMovement : MonoBehaviour
     
         MyInput();
         SpeedControl();
-        //Handle drag
-        if(_isGrounded)
-            _rb.linearDamping = groundDrag;
-        else
-            _rb.linearDamping = 0;
-    
+        if (flashLightActivated)
+        {
+            FlashlightDetect();
+        }
     }
 
     private void FixedUpdate()
@@ -162,24 +162,47 @@ public class PlayerMovement : MonoBehaviour
                 case 0:
                     break;
                 case 1:
-                    //infiltration
+                    isInRange = false;
+                    isNotHidden = false;
+                    for (int i = 0; i < _TargetsPanel.Length; i++)
+                    {
+                        if (Vector3.Distance(transform.position, _TargetsPanel[i].transform.position) < DetectRange)
+                        {
+                            isInRange = true;
+                        }
+
+                        RaycastHit hit;
+                        if (Physics.Raycast(transform.position, (_TargetsPanel[i].transform.position - transform.position), out hit, Mathf.Infinity))
+                        {
+                            if (hit.transform == _TargetsPanel[i].transform)
+                            {
+                                isNotHidden = true;
+                            }
+                        }
+
+                        if (isInRange && isNotHidden)
+                        {
+                            _TargetsPanel[i].activation();
+                        }
+                    }
                     break;
                 case 2:
                     if (haveLight)
                     {
-                        if (!flashLightActivated) 
+                        if (flashLightActivated) 
                         { 
-                            flashLightActivated = true;
+                            flashLightActivated = false;
                             light.SetActive(false); 
                         }
                         else 
                         { 
-                            flashLightActivated = false;
+                            flashLightActivated = true;
                             light.SetActive(true); 
                         }
                     }
                     break;
                 case 3:
+                    
                     break;
                 default:
                     break;
@@ -187,43 +210,41 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*void FlashlightDetect()
+    void FlashlightDetect()
     {
         isInAngle = false;
         isInRange = false;
         isNotHidden = false;
-        foreach (LightSphere target in targets)
+        for (int i = 0; i < _TargetsSphere.Length; i++)
         {
-            
-        }
-        if (Vector3.Distance(transform.position, target.transform.position) < DetectRange)
-        {
-            isInRange = true;
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, (target.transform.position - transform.position), out hit, Mathf.Infinity))
-        {
-            if (hit.transform == target.transform)
+            if (Vector3.Distance(transform.position, _TargetsSphere[i].transform.position) < DetectRange)
             {
-                isNotHidden = true;
+                isInRange = true;
+            }
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, (_TargetsSphere[i].transform.position - transform.position), out hit, Mathf.Infinity))
+            {
+                if (hit.transform == _TargetsSphere[i].transform)
+                {
+                    isNotHidden = true;
+                }
+            }
+
+            Vector3 side1 = _TargetsSphere[i].transform.position - transform.position;
+            Vector3 side2 = transform.forward;
+            float angle = Vector3.SignedAngle(side1, side2, Vector3.up);
+            if (angle < DetectAngle && angle > -1 * DetectAngle)
+            {
+                isInAngle = true;
+            }
+
+            if (isInAngle && isInRange && isNotHidden)
+            {
+                _TargetsSphere[i].activation();
             }
         }
-
-        Vector3 side1 = target.transform.position - transform.position;
-        Vector3 side2 = transform.forward;
-        float angle = Vector3.SignedAngle(side1, side2, Vector3.up);
-        if (angle < DetectAngle && angle > -1 * DetectAngle)
-        {
-            isInAngle = true;
-        }
-
-        if (isInAngle && isInRange && isNotHidden)
-        {
-            target.activation();
-        }
-    }*/
-    
+    }
     public void win()
     {
         if (part1 && part3 && part2)
