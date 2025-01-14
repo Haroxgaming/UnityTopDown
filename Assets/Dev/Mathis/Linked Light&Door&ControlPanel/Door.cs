@@ -9,11 +9,22 @@ public class Door : MonoBehaviour
     bool activation;
 
     private Vector3 targetPos, newPos;
+    private Vector3 temp;
 
     public Vector3 minPos, maxPos;
     public void open()
     {
         activation = true;
+        temp = minPos;
+        minPos = maxPos;
+        maxPos = temp;
+    }
+    public void close()
+    {
+        activation = true;
+        temp = minPos;
+        minPos = maxPos;
+        maxPos = temp;
     }
     
     void Update()
