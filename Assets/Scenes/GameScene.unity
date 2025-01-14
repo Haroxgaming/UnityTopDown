@@ -5084,6 +5084,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMix: {fileID: 24100000, guid: 97a3422ea3d703d448685880edeeb040, type: 2}
+  volumeValue: 0
+  volumeSlider: {fileID: 1986254508}
   resolutionDropdown: {fileID: 1727749416}
 --- !u!1001 &1808368280
 PrefabInstance:
@@ -5799,6 +5801,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1766999185}
   m_SourcePrefab: {fileID: 100100000, guid: 70a0994917215874296f9daa2f93a291, type: 3}
+--- !u!114 &1986254508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6004920962368138039, guid: 70a0994917215874296f9daa2f93a291, type: 3}
+  m_PrefabInstance: {fileID: 1986254507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2020825850
 PrefabInstance:
   m_ObjectHideFlags: 0

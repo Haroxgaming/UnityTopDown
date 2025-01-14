@@ -3,18 +3,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 
+using Slider = UnityEngine.UI.Slider;
+
 
 namespace Dev.Evan.Scripts
 {
     public class SettingsMenu : MonoBehaviour
     {
         public AudioMixer audioMix; 
+        public float volumeValue;
+        public Slider volumeSlider;
         public TMP_Dropdown resolutionDropdown;
         
         Resolution[] _resolutions;
 
         void Start()
         {
+            volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+            
             _resolutions = Screen.resolutions; // Récupère les résolutions disponibles
             resolutionDropdown.ClearOptions(); // Efface les options du Dropdown
             List<string> options = new List<string>();
@@ -52,10 +58,17 @@ namespace Dev.Evan.Scripts
             // Actualise l'affichage du menu déroulant
             resolutionDropdown.RefreshShownValue();
         }
-    
+
+        void Update()
+        {
+            audioMix.SetFloat("Volume", volumeValue);
+            PlayerPrefs.SetFloat("Volume", volumeValue);
+        }
+        
         public void SetVolume(float volume)
         {
-            audioMix.SetFloat("Volume", volume);
+            audioMix.SetFloat("Volume", volumeValue);
+            volumeValue = volume;
         }
 
         public void SetQuality (int qualityIndex)
