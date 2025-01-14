@@ -36,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     Vector3 RespawnTransform; 
     
-    public float DetectRange = 10;
-    public float DetectAngle = 45;
+    public float DetectRange = 2;
+    public float DetectAngle = 20;
     private bool isInAngle, isInRange, isNotHidden;
 
     private void Start()
