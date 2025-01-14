@@ -14,11 +14,13 @@ namespace Dev.Evan.Scripts
         public float volumeValue;
         public Slider volumeSlider;
         public TMP_Dropdown resolutionDropdown;
-        
+
+        QualitySettings[] _qualitySettings;
         Resolution[] _resolutions;
 
         void Start()
         {
+            
             volumeSlider.value = PlayerPrefs.GetFloat("Volume");
             
             _resolutions = Screen.resolutions; // Récupère les résolutions disponibles

@@ -5861,6 +5861,8 @@ MonoBehaviour:
   volumeValue: 0
   volumeSlider: {fileID: 1250818957}
   resolutionDropdown: {fileID: 951589797}
+  qualityDropdown: {fileID: 407363245}
+  qualityValue: 0
 --- !u!1 &1616468337
 GameObject:
   m_ObjectHideFlags: 0
