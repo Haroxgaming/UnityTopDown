@@ -1,10 +1,18 @@
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("HUD")]
+    public TMP_Text textPart;
+    public TMP_Text fullText;
+    public int numberPart = 3;
+    public Image imagePart1;
+    public Image imagePart2;
+    public Image imagePart3;
+    YieldInstruction wait = new WaitForSeconds(5.0f);
 
     [Header("Movement")]
     public float moveSpeed;
@@ -74,6 +82,31 @@ public class PlayerMovement : MonoBehaviour
 				jetpackTimer += Time.deltaTime;
 			}
 		}
+        if (part1 = true)
+        {
+            numberPart--;
+            textPart.text = numberPart.ToString();
+            imagePart1.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+        }
+        if (part2 = true)
+        {
+            numberPart--;
+            textPart.text = numberPart.ToString();
+            imagePart2.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+        }
+        if (part3 = true)
+        {
+            numberPart--;
+            textPart.text = numberPart.ToString();
+            imagePart3.GetComponent<Image>().color = new Color(255, 255, 255, 255);
+        }
+
+        if (numberPart == 0)
+        {
+            wait = new WaitForSeconds(5.0f);
+            textPart.text = "";
+            fullText.text = "- Goodbye";
+        }
     }
 
     private void FixedUpdate()
@@ -273,12 +306,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    
+    
 
     public void win()
     {
         if (part1 && part3 && part2)
         {
-            
+            SceneManager.LoadScene(2);
         }
     }
 }
