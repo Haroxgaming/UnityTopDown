@@ -7,7 +7,7 @@ using TMPro;
 public class AIControler : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
-    public float startWaitTime = 4;
+    public float startWaitTime = 2;
     public float timeToRotate = 2;
     public float speedWalk = 6;
     public float speedRun = 9;
@@ -33,10 +33,15 @@ public class AIControler : MonoBehaviour
     public float DetectRange = 10;
     public float DetectAngle = 45;
     private bool isInAngle, isInRange, isNotHidden, isDetected;
+    private Quaternion initialArmRRot, initialArmLRot, initialLegRRot, initialLegLRot;
+    public float limbSwingAmplitude = 60f;
+
+
     public GameObject Player;
-    public TMP_Text RangeText, HiddenText, AngleText, DetectedText;
     
     public PlayerMovement player;
+
+    public GameObject head, body, armR, armL, legR, legL;
 
     void Start()
     {
@@ -52,12 +57,16 @@ public class AIControler : MonoBehaviour
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+        if (armR != null) initialArmRRot = armR.transform.localRotation;
+        if (armL != null) initialArmLRot = armL.transform.localRotation;
+        if (legR != null) initialLegRRot = legR.transform.localRotation;
+        if (legL != null) initialLegLRot = legL.transform.localRotation;
     }
     
     void Update()
     {
         DetectPlayer();
-
+        AnimateLimbs(15);
         if (!m_IsPatrol)
         {
             Chasing();
@@ -142,6 +151,37 @@ public class AIControler : MonoBehaviour
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
     }
+    
+    void AnimateLimbs(float move)
+    {
+        if (move == 0) return; 
+
+        float limbSwing = Mathf.Sin(Time.time * 5f) * limbSwingAmplitude;
+
+        if (armR != null)
+        {
+            Quaternion targetRotation = initialArmRRot * Quaternion.Euler(limbSwing, 0, 0);
+            armR.transform.localRotation = Quaternion.Lerp(armR.transform.localRotation, targetRotation, Time.deltaTime);
+        }
+
+        if (armL != null)
+        {
+            Quaternion targetRotation = initialArmLRot * Quaternion.Euler(-limbSwing, 0, 0);
+            armL.transform.localRotation = Quaternion.Lerp(armL.transform.localRotation, targetRotation, Time.deltaTime);
+        }
+
+        if (legR != null)
+        {
+            Quaternion targetRotation = initialLegRRot * Quaternion.Euler(limbSwing, 0, 0);
+            legR.transform.localRotation = Quaternion.Lerp(legR.transform.localRotation, targetRotation, Time.deltaTime);
+        }
+        
+        if (legL != null)
+        {
+            Quaternion targetRotation = initialLegLRot * Quaternion.Euler(-limbSwing, 0, 0);
+            legL.transform.localRotation = Quaternion.Lerp(legL.transform.localRotation, targetRotation, Time.deltaTime);
+        }
+    }
 
     void Stop()
     {
@@ -190,28 +230,13 @@ public class AIControler : MonoBehaviour
         if (Vector3.Distance(transform.position, Player.transform.position) < DetectRange)
         {
             isInRange = true;
-            RangeText.text = "In Range";
-            RangeText.color = Color.red;
         }
-        else
-        {
-            RangeText.text = "Not In Range";
-            RangeText.color = Color.green;
-        }
-
         RaycastHit hit;
         if (Physics.Raycast(transform.position, (Player.transform.position - transform.position), out hit, Mathf.Infinity))
         {
             if (hit.transform == Player.transform)
             {
                 isNotHidden = true;
-                HiddenText.text = "Not Hidden";
-                HiddenText.color = Color.red;
-            }
-            else
-            {
-                HiddenText.text = "Hidden";
-                HiddenText.color = Color.green;
             }
         }
 
@@ -221,19 +246,10 @@ public class AIControler : MonoBehaviour
         if (angle < DetectAngle && angle > -1 * DetectAngle)
         {
             isInAngle = true;
-            AngleText.text = "In Vision Angle";
-            AngleText.color = Color.red;
-        }
-        else
-        {
-            AngleText.text = "Not In Vision Angle";
-            AngleText.color = Color.green;
         }
 
         if (isInAngle && isInRange && isNotHidden)
         {
-            DetectedText.text = "Player Detected";
-            DetectedText.color = Color.red;
             m_PlayerPosition = Player.transform.position;
             m_IsPatrol = false;
             isDetected = true;
@@ -241,16 +257,12 @@ public class AIControler : MonoBehaviour
         }
         else if (isDetected && Vector3.Distance(transform.position, Player.transform.position) < (DetectRange -4))
         {
-            DetectedText.text = "Player Detected";
-            DetectedText.color = Color.red;
             m_PlayerPosition = Player.transform.position;
             m_IsPatrol = false;
             isDetected = true;
         }
         else
         {
-            DetectedText.text = "Player Not Detected";
-            DetectedText.color = Color.green;
             m_IsPatrol = true;
             isDetected = false;
         }
