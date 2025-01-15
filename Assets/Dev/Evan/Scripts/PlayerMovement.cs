@@ -28,7 +28,14 @@ public class PlayerMovement : MonoBehaviour
     bool _isGrounded;
     private bool jetpackReload;
     public float jetpackTimer = 2.0f;
-    public bool haveLight, haveJetpack, haveTelecommande, part1, part2, part3;
+    public bool haveLight, haveJetpack, haveTelecommande;
+    
+    public bool part1 = false;
+    private bool part1Make = false;
+    public bool part2 = false;
+    private bool part2Make = false;
+    public bool part3 = false;
+    private bool part3Make = false;
     private bool flashLightActivated = false;
     public new GameObject light;
     public int zone;
@@ -89,21 +96,24 @@ public class PlayerMovement : MonoBehaviour
 				jetpackTimer += Time.deltaTime;
 			}
 		}
-        if (part1 = true)
+        if (part1 && !part1Make)
         {
             numberPart--;
+            part1Make = true;
             textPart.text = numberPart.ToString();
             imagePart1.GetComponent<Image>().color = new Color(255, 255, 255, 255);
         }
-        if (part2 = true)
+        if (part2 && !part2Make)
         {
             numberPart--;
+            part2Make = true;
             textPart.text = numberPart.ToString();
             imagePart2.GetComponent<Image>().color = new Color(255, 255, 255, 255);
         }
-        if (part3 = true)
+        if (part3 && !part3Make)
         {
             numberPart--;
+            part3Make = true;
             textPart.text = numberPart.ToString();
             imagePart3.GetComponent<Image>().color = new Color(255, 255, 255, 255);
         }
@@ -331,9 +341,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    
-    
-
     public void win()
     {
         if (part1 && part3 && part2)
