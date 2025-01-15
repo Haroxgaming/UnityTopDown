@@ -212,11 +212,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FlashlightDetect()
     {
-        isInAngle = false;
-        isInRange = false;
-        isNotHidden = false;
         for (int i = 0; i < _TargetsSphere.Length; i++)
         {
+            isInAngle = false;
+            isInRange = false;
+            isNotHidden = false;
             if (Vector3.Distance(transform.position, _TargetsSphere[i].transform.position) < DetectRange)
             {
                 isInRange = true;

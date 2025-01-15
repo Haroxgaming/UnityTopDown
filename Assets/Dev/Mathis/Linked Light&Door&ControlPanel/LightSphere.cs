@@ -13,27 +13,31 @@ public class LightSphere : MonoBehaviour
 
     public void activation()
     {
-        if (_NeedForActivate == null || _NeedForActivate.Length == 0)
+        if (!activate)
         {
-            ActivateThisSphere();
-        }
-        else
-        { 
-            bool allRequiredActivated = true;
-            foreach (var sphere in _NeedForActivate)
-            {
-                if (!sphere.activate)
-                {
-                    allRequiredActivated = false;
-                    break;
-                }
-            }
-
-            if (allRequiredActivated && !activate)
+            if (_NeedForActivate == null || _NeedForActivate.Length == 0)
             {
                 ActivateThisSphere();
             }
+            else
+            { 
+                bool allRequiredActivated = true;
+                foreach (var sphere in _NeedForActivate)
+                {
+                    if (!sphere.activate)
+                    {
+                        allRequiredActivated = false;
+                        break;
+                    }
+                }
+
+                if (allRequiredActivated && !activate)
+                {
+                    ActivateThisSphere();
+                }
+            }
         }
+        
     }
 
     private void ActivateThisSphere()
@@ -43,7 +47,6 @@ public class LightSphere : MonoBehaviour
             colorChange.GetComponent<Renderer>().material = matEnable;
         }
         activate = true;
-
         if (haveDoorLinked && linkedDoor != null)
         {
             linkedDoor.open();
@@ -54,7 +57,7 @@ public class LightSphere : MonoBehaviour
     {
         if (colorChange != null && colorChange.GetComponent<Renderer>() != null)
         {
-            colorChange.GetComponent<Renderer>().material = matDisable; // Utilise le matériau désactivé
+            colorChange.GetComponent<Renderer>().material = matDisable; 
         }
         activate = false;
     }
