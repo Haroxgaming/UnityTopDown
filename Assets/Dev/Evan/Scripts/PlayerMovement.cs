@@ -18,10 +18,11 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight;
     public LayerMask whatIsGround;
     bool _isGrounded;
-
+    private bool jetpackReload;
+    public float jetpackTimer = 2.0f;
     public bool haveLight, haveJetpack, haveTelecommande, part1, part2, part3;
     private bool flashLightActivated = false;
-    public GameObject light;
+    public new GameObject light;
     public int zone;
     private bool _pauseBool;
     public Transform orientation;
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         pauseGame();
         //Ground check
         _isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-    
+        zoneChange();
         MyInput();
         SpeedControl();
         if (flashLightActivated)
@@ -77,6 +78,15 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    void zoneChange()
+    {
+        if (zone != 2)
+        {
+            flashLightActivated = false;
+            light.SetActive(false); 
+        }
+    }
+
     private void MovePlayer()
     {
         if (_fireInput != 0 || _verticalInput != 0 || _horizontalInput != 0)
@@ -96,18 +106,31 @@ public class PlayerMovement : MonoBehaviour
                     _rb.linearVelocity = _moveDirection * moveSpeed;
                     break;
                 case 3:
-                    if (haveJetpack && _fireInput != 0)
+                    if (haveJetpack && _fireInput != 0 && jetpackReload)
                     {
                         _moveDirection.Set(_verticalInput, _fireInput, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
                         var pos = transform.position;
                         pos.y =  Mathf.Clamp(transform.position.y, -20.0f, 4.0f);
                         transform.position = pos;
+                        jetpackTimer -= Time.deltaTime;
+                        if (jetpackTimer <= 0)
+                        {
+                            jetpackReload = false;
+                        }
                     }
                     else if (transform.position.y < 1.7f)
                     {
                         _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
+                        if (jetpackTimer == 2.0f)
+                        {
+                            jetpackReload = true;
+                        }
+                        else
+                        {
+                            jetpackTimer += Time.deltaTime;
+                        }
                     }
                     else
                     {

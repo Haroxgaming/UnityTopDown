@@ -7,6 +7,10 @@ public class CamTrigger : MonoBehaviour
     public Vector3 newCamPos, newPlayerPos;
 
     CamController camControl;
+    public PlayerMovement playerRef;
+
+    public int zoneChange;
+    
     void Start()
     {
         camControl = Camera.main.GetComponent<CamController>();
@@ -20,6 +24,7 @@ public class CamTrigger : MonoBehaviour
             camControl.maxPos += newCamPos;
 
             other.transform.position += newPlayerPos;
+            playerRef.zone = zoneChange;
         }
     }
 }

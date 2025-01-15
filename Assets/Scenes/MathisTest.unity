@@ -4233,6 +4233,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransiMountains1 new
       objectReference: {fileID: 0}
+    - target: {fileID: 4930095430305915499, guid: 4258d11019411fe49876c268b2fab296, type: 3}
+      propertyPath: playerRef
+      value: 
+      objectReference: {fileID: 1334654308}
+    - target: {fileID: 4930095430305915499, guid: 4258d11019411fe49876c268b2fab296, type: 3}
+      propertyPath: zoneChange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5850013135564760744, guid: 4258d11019411fe49876c268b2fab296, type: 3}
       propertyPath: m_LocalPosition.x
       value: 39.5
