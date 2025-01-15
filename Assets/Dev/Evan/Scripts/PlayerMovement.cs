@@ -49,16 +49,23 @@ public class PlayerMovement : MonoBehaviour
     public float DetectAngle = 20;
     private bool isInAngle, isInRange, isNotHidden;
 
+    private int _animIDrun;
+    private int _animIDGrounded;
+    private Animator _animator;
+    private bool _hasAnimator;
+    
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
+        _hasAnimator = TryGetComponent(out _animator);
     }
 
     private void Update()
     {
+        _hasAnimator = TryGetComponent(out _animator);
         useObject();
         pauseGame();
         //Ground check
@@ -112,6 +119,19 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        GroundedCheck();
+    }
+    
+    private void GroundedCheck()
+    {
+        if (transform.position.y > 1.75f)
+        {
+            _animator.SetBool("Grounded", false);
+        }
+        else
+        {
+            _animator.SetBool("Grounded", true);
+        }
     }
 
     private void MyInput()
@@ -136,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_fireInput != 0 || _verticalInput != 0 || _horizontalInput != 0)
         {
+            _animator.SetBool("run", true);
             switch (zone)
             {
                 case 0:
@@ -177,6 +198,10 @@ public class PlayerMovement : MonoBehaviour
                     }
                     break;
             }
+        }
+        else
+        {
+            _animator.SetBool("run", false);
         }
     }
 
