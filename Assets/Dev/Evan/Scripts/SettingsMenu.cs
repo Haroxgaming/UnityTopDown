@@ -14,13 +14,14 @@ namespace Dev.Evan.Scripts
         public float volumeValue;
         public Slider volumeSlider;
         public TMP_Dropdown resolutionDropdown;
-
-        QualitySettings[] _qualitySettings;
+        public TMP_Dropdown qualityDropdown;
+        
+        
         Resolution[] _resolutions;
 
         void Start()
         {
-            
+            qualityDropdown.value = PlayerPrefs.GetInt("Quality");
             volumeSlider.value = PlayerPrefs.GetFloat("Volume");
             
             _resolutions = Screen.resolutions; // Récupère les résolutions disponibles
@@ -65,6 +66,8 @@ namespace Dev.Evan.Scripts
         {
             audioMix.SetFloat("Volume", volumeValue);
             PlayerPrefs.SetFloat("Volume", volumeValue);
+            PlayerPrefs.SetInt("Quality", qualityDropdown.value);
+            qualityDropdown.name = qualityDropdown.options[qualityDropdown.value].text;
         }
         
         public void SetVolume(float volume)
@@ -75,7 +78,11 @@ namespace Dev.Evan.Scripts
 
         public void SetQuality (int qualityIndex)
         {
-            QualitySettings.SetQualityLevel(qualityIndex);
+            int pickedEntryIndex = qualityDropdown.value;
+            string selectedOption = qualityDropdown.options[pickedEntryIndex].text;
+            Debug.Log(selectedOption);
+            QualitySettings.SetQualityLevel(pickedEntryIndex);
+            qualityDropdown.RefreshShownValue();
         }
 
         public void SetResolution(int resolutionIndex)
