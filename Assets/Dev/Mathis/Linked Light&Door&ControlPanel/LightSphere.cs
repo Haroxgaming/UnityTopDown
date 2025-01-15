@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class LightSphere : MonoBehaviour
 {
-    public GameObject colorChange;
     public Door linkedDoor;
     public bool activate;
     public bool haveDoorLinked;
-
-    public Material matEnable;
-    public Material matDisable;
+    public GameObject Vfx;
     public LightSphere[] _NeedForActivate;
 
     public void activation()
@@ -42,10 +39,7 @@ public class LightSphere : MonoBehaviour
 
     private void ActivateThisSphere()
     {
-        if (colorChange != null && colorChange.GetComponent<Renderer>() != null)
-        {
-            colorChange.GetComponent<Renderer>().material = matEnable;
-        }
+        Vfx.SetActive(true);
         activate = true;
         if (haveDoorLinked && linkedDoor != null)
         {
@@ -55,10 +49,7 @@ public class LightSphere : MonoBehaviour
 
     public void reset()
     {
-        if (colorChange != null && colorChange.GetComponent<Renderer>() != null)
-        {
-            colorChange.GetComponent<Renderer>().material = matDisable; 
-        }
+        Vfx.SetActive(false);
         activate = false;
     }
 }

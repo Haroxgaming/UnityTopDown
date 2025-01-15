@@ -891,12 +891,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c179838541624d92ce089c6fbbc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorChange: {fileID: 393319824}
   linkedDoor: {fileID: 1803132156}
   activate: 0
   haveDoorLinked: 1
-  matEnable: {fileID: 2100000, guid: 7c0e2a5746426334298b88549a998756, type: 2}
-  matDisable: {fileID: 0}
+  Vfx: {fileID: 954994991}
   _NeedForActivate:
   - {fileID: 2134876623}
 --- !u!1 &410087039
@@ -1465,7 +1463,20 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 1803132155}
-    m_RemovedComponents: []
+    - target: {fileID: 7515652662118927523, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
+      propertyPath: linkedDoor
+      value: 
+      objectReference: {fileID: 1803132156}
+    - target: {fileID: 7515652662118927523, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
+      propertyPath: _NeedForActivate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515652662118927523, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
+      propertyPath: '_NeedForActivate.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7515652662118927523, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -2679,6 +2690,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb5e1fc2500f1f648bc98e0f064aa09f, type: 3}
+--- !u!1 &954994991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4658667907066510452, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
+  m_PrefabInstance: {fileID: 561069969}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978478991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +2803,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1093882144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4658667907066510452, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
+  m_PrefabInstance: {fileID: 1146037854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1146037854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2855,7 +2876,12 @@ PrefabInstance:
       propertyPath: '_data._objectReferences.Array.data[0]'
       value: 
       objectReference: {fileID: 1803132155}
-    m_RemovedComponents: []
+    - target: {fileID: 7515652662118927523, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
+      propertyPath: activate
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7515652662118927523, guid: 4312a264bc9cb1f43bad9a81bd07ab1f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5473,12 +5499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c179838541624d92ce089c6fbbc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorChange: {fileID: 2134876616}
   linkedDoor: {fileID: 0}
   activate: 0
   haveDoorLinked: 0
-  matEnable: {fileID: 2100000, guid: 7c0e2a5746426334298b88549a998756, type: 2}
-  matDisable: {fileID: 0}
+  Vfx: {fileID: 1093882144}
   _NeedForActivate: []
 --- !u!65 &2134876624
 BoxCollider:

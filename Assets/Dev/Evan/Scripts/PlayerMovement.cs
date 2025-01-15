@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     Vector3 RespawnTransform; 
     
-    public float DetectRange = 2;
+    public float DetectRange = 4;
     public float DetectAngle = 20;
     private bool isInAngle, isInRange, isNotHidden;
 
@@ -62,6 +62,18 @@ public class PlayerMovement : MonoBehaviour
         {
             FlashlightDetect();
         }
+		if (!jetpackReload)
+		{
+			if (jetpackTimer >= 2.0f)
+        	{
+				jetpackTimer = 2.0f;
+        	    jetpackReload = true;
+        	}
+			else
+			{
+				jetpackTimer += Time.deltaTime;
+			}
+		}
     }
 
     private void FixedUpdate()
@@ -123,14 +135,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
-                        if (jetpackTimer == 2.0f)
-                        {
-                            jetpackReload = true;
-                        }
-                        else
-                        {
-                            jetpackTimer += Time.deltaTime;
-                        }
+						jetpackReload = false;
                     }
                     else
                     {
@@ -268,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
     public void win()
     {
         if (part1 && part3 && part2)
