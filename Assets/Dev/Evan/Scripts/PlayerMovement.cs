@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject imageobject1;
     public GameObject imageobject2;
     public GameObject imageobject3;
+    public GameObject HUD;
     YieldInstruction wait = new WaitForSeconds(5.0f);
     public AudioSource musiqueSource;
     public AudioSource deathSource;
@@ -340,6 +341,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Escape"))
         {
+            HUD.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             pausePanel.SetActive(true);
