@@ -7,7 +7,7 @@ public class Collectible : MonoBehaviour
     public AudioSource source;
     public int type;
     public PlayerMovement player;
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
