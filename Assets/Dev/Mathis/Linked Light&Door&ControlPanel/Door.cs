@@ -3,6 +3,10 @@ using System;
 
 public class Door : MonoBehaviour
 {
+    [Header("Sound")]
+    public AudioSource OpenSound;
+    public AudioSource CloseSound;
+    
     public float smoothSpeed;
     private Vector3 targetPos, newPos;
     private Vector3 temp;
@@ -12,11 +16,13 @@ public class Door : MonoBehaviour
     {
         if (activated)
         {
+            OpenSound.Play();
             minPos = temp;
             activated = false;
         }
         else
         {
+            CloseSound.Play();
             temp = minPos;
             minPos = maxPos;
             activated = true;
