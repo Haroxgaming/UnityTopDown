@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject imageobject3;
     YieldInstruction wait = new WaitForSeconds(5.0f);
     public AudioSource musiqueSource;
+    public AudioSource deathSource;
+    public AudioSource FlashlightSourceON;
+    public AudioSource FlashlightSourceOFF;
+    public AudioSource telecomandeSource;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -323,6 +327,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void Respawn()
     {
+        deathSource.Play();
         transform.position = RespawnTransform;
     }
 
@@ -372,6 +377,7 @@ public class PlayerMovement : MonoBehaviour
 
                         if (isInRange && isNotHidden)
                         {
+                            telecomandeSource.Play();
                             _TargetsPanel[i].activation();
                         }
                     }
@@ -381,11 +387,13 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if (flashLightActivated) 
                         { 
+                            FlashlightSourceOFF.Play();
                             flashLightActivated = false;
                             light.SetActive(false); 
                         }
                         else 
                         { 
+                            FlashlightSourceON.Play();
                             flashLightActivated = true;
                             light.SetActive(true); 
                         }

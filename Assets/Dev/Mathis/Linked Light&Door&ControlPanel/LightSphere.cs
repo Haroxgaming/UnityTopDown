@@ -7,6 +7,7 @@ public class LightSphere : MonoBehaviour
     public bool haveDoorLinked;
     public GameObject Vfx;
     public LightSphere[] _NeedForActivate;
+    public AudioSource _Audio;
 
     public void activation()
     {
@@ -46,6 +47,7 @@ public class LightSphere : MonoBehaviour
 
     private void ActivateThisSphere()
     {
+        _Audio.Play();
         Vfx.SetActive(true);
         activate = true;
         if (haveDoorLinked && linkedDoor != null)
@@ -56,6 +58,7 @@ public class LightSphere : MonoBehaviour
 
     public void reset()
     {
+        _Audio.Play();
         Vfx.SetActive(false);
         activate = false;
     }

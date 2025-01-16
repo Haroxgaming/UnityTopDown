@@ -6,6 +6,7 @@ using TMPro;
 
 public class AIControler : MonoBehaviour
 {
+    public AudioSource musiqueSource;
     public NavMeshAgent navMeshAgent;
     public float startWaitTime = 2;
     public float timeToRotate = 2;
@@ -272,6 +273,7 @@ public class AIControler : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            musiqueSource.Play();
             player.Respawn();
         }
     }
