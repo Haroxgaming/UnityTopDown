@@ -296,9 +296,10 @@ public class PlayerMovement : MonoBehaviour
                     }
                     break;
             }
-            if (_moveDirection.sqrMagnitude > 0.01f) 
+            if (_moveDirection.sqrMagnitude > 0.01f)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
+                Vector3 direction = new Vector3(_moveDirection.x, 0, _moveDirection.z).normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
