@@ -936,11 +936,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: 3c41657beebe07b47806ef160c448f44, type: 2}
-  VisionRange: 10
+  VisionRange: 4
   VisionAngle: 45
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 1047
+    m_Bits: 4294967295
   VisionConeResolution: 120
 --- !u!114 &69708965
 MonoBehaviour:
@@ -958,7 +958,7 @@ MonoBehaviour:
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
-  speedRun: 9
+  speedRun: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -973,7 +973,7 @@ MonoBehaviour:
   - {fileID: 1073295200}
   - {fileID: 1564064562}
   - {fileID: 94353438}
-  DetectRange: 10
+  DetectRange: 4
   DetectAngle: 45
   limbSwingAmplitude: 60
   Player: {fileID: 392136756}
@@ -1409,11 +1409,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: 3c41657beebe07b47806ef160c448f44, type: 2}
-  VisionRange: 10
+  VisionRange: 4
   VisionAngle: 45
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 1047
+    m_Bits: 4294967295
   VisionConeResolution: 120
 --- !u!114 &146993405
 MonoBehaviour:
@@ -1431,7 +1431,7 @@ MonoBehaviour:
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
-  speedRun: 9
+  speedRun: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1443,7 +1443,7 @@ MonoBehaviour:
   edgeDistance: 0.5
   waypoints:
   - {fileID: 307744693}
-  DetectRange: 10
+  DetectRange: 4
   DetectAngle: 45
   limbSwingAmplitude: 60
   Player: {fileID: 392136756}
@@ -3522,6 +3522,73 @@ MonoBehaviour:
   smoothSpeed: 0.01
   minPos: {x: 37, y: 19, z: 6}
   maxPos: {x: 37, y: 19, z: 6}
+--- !u!1 &332238673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332238676}
+  - component: {fileID: 332238675}
+  - component: {fileID: 332238674}
+  m_Layer: 0
+  m_Name: Kill zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &332238674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332238673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f505a650d841b345a04d7a63adba881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 392136761}
+--- !u!65 &332238675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332238673}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 200, y: 1, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &332238676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332238673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.455952, y: -3, z: 27.052841}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &342925070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9519,11 +9586,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: 3c41657beebe07b47806ef160c448f44, type: 2}
-  VisionRange: 10
+  VisionRange: 4
   VisionAngle: 45
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 1047
+    m_Bits: 4294967295
   VisionConeResolution: 120
 --- !u!114 &834212061
 MonoBehaviour:
@@ -9541,7 +9608,7 @@ MonoBehaviour:
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
-  speedRun: 9
+  speedRun: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -9553,7 +9620,7 @@ MonoBehaviour:
   edgeDistance: 0.5
   waypoints:
   - {fileID: 1758664161}
-  DetectRange: 10
+  DetectRange: 4
   DetectAngle: 45
   limbSwingAmplitude: 60
   Player: {fileID: 392136756}
@@ -16568,11 +16635,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: 3c41657beebe07b47806ef160c448f44, type: 2}
-  VisionRange: 10
+  VisionRange: 4
   VisionAngle: 45
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 1047
+    m_Bits: 4294967295
   VisionConeResolution: 120
 --- !u!114 &1487773342
 MonoBehaviour:
@@ -16590,7 +16657,7 @@ MonoBehaviour:
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
-  speedRun: 9
+  speedRun: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -16602,7 +16669,7 @@ MonoBehaviour:
   edgeDistance: 0.5
   waypoints:
   - {fileID: 514216637}
-  DetectRange: 10
+  DetectRange: 4
   DetectAngle: 45
   limbSwingAmplitude: 60
   Player: {fileID: 392136756}
@@ -21422,11 +21489,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: 3c41657beebe07b47806ef160c448f44, type: 2}
-  VisionRange: 10
+  VisionRange: 4
   VisionAngle: 45
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 1047
+    m_Bits: 4294967295
   VisionConeResolution: 120
 --- !u!114 &1957414356
 MonoBehaviour:
@@ -21444,7 +21511,7 @@ MonoBehaviour:
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
-  speedRun: 9
+  speedRun: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -21456,7 +21523,7 @@ MonoBehaviour:
   edgeDistance: 0.5
   waypoints:
   - {fileID: 240554101}
-  DetectRange: 10
+  DetectRange: 4
   DetectAngle: 45
   limbSwingAmplitude: 60
   Player: {fileID: 392136756}
@@ -23007,11 +23074,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: 3c41657beebe07b47806ef160c448f44, type: 2}
-  VisionRange: 10
+  VisionRange: 4
   VisionAngle: 45
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 1047
+    m_Bits: 4294967295
   VisionConeResolution: 120
 --- !u!114 &2055115130
 MonoBehaviour:
@@ -23029,7 +23096,7 @@ MonoBehaviour:
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
-  speedRun: 9
+  speedRun: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -23041,7 +23108,7 @@ MonoBehaviour:
   edgeDistance: 0.5
   waypoints:
   - {fileID: 683161787}
-  DetectRange: 10
+  DetectRange: 4
   DetectAngle: 45
   limbSwingAmplitude: 60
   Player: {fileID: 392136756}
@@ -24808,3 +24875,4 @@ SceneRoots:
   - {fileID: 1564064562}
   - {fileID: 94353438}
   - {fileID: 1766064321}
+  - {fileID: 332238676}
