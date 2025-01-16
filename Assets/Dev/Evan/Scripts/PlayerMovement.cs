@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private int _animIDrun;
     private int _animIDGrounded;
     private Animator _animator;
+    float rotationSpeed = 5.0f;
     private bool _hasAnimator;
     
     private void Start()
@@ -162,6 +163,10 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("Grounded", false);
         }
+        else if (transform.position.y < 1f)
+        {
+            _animator.SetBool("Grounded", false);
+        }
         else
         {
             _animator.SetBool("Grounded", true);
@@ -190,20 +195,31 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_fireInput != 0 || _verticalInput != 0 || _horizontalInput != 0)
         {
-            _animator.SetBool("run", true);
             switch (zone)
             {
                 case 0:
                     _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                     _rb.linearVelocity = _moveDirection * moveSpeed;
+                    if (_verticalInput != 0 || _horizontalInput != 0)
+                    {
+                        _animator.SetBool("run", true);
+                    }
                     break;
                 case 1:
                     _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                     _rb.linearVelocity = _moveDirection * moveSpeed;
+                    if (_verticalInput != 0 || _horizontalInput != 0)
+                    {
+                        _animator.SetBool("run", true);
+                    }                    
                     break;
                 case 2: 
                     _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                     _rb.linearVelocity = _moveDirection * moveSpeed;
+                    if (_verticalInput != 0 || _horizontalInput != 0)
+                    {
+                        _animator.SetBool("run", true);
+                    }                    
                     break;
                 case 3:
                     if (haveJetpack && _fireInput != 0 && jetpackReload)
@@ -215,6 +231,7 @@ public class PlayerMovement : MonoBehaviour
                         pos.y =  Mathf.Clamp(transform.position.y, -20.0f, 4.0f);
                         transform.position = pos;
                         jetpackTimer -= Time.deltaTime;
+                        _animator.SetBool("Grounded", false);
                         if (jetpackTimer <= 0)
                         {
                             jetpackReload = false;
@@ -226,15 +243,29 @@ public class PlayerMovement : MonoBehaviour
                         _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
 						jetpackReload = false;
+                        _animator.SetBool("run", true);
+                        musiqueSource.Stop();
+                    }
+                    else if (transform.position.y < 1.55f)
+                    {
+                        _moveDirection.Set(_verticalInput, -1, _horizontalInput);
+                        _rb.linearVelocity = _moveDirection * moveSpeed;
+                        _animator.SetBool("Grounded", false);
                         musiqueSource.Stop();
                     }
                     else
                     {
                         _moveDirection.Set(_verticalInput, -1, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
+                        _animator.SetBool("Grounded", false);
                         musiqueSource.Stop();
                     }
                     break;
+            }
+            if (_moveDirection.sqrMagnitude > 0.01f) 
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
         else
