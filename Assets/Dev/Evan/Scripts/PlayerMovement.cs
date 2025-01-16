@@ -359,28 +359,31 @@ public class PlayerMovement : MonoBehaviour
                 case 0:
                     break;
                 case 1:
-                    isInRange = false;
-                    isNotHidden = false;
-                    for (int i = 0; i < _TargetsPanel.Length; i++)
+                    if (haveTelecommande)
                     {
-                        if (Vector3.Distance(transform.position, _TargetsPanel[i].transform.position) < DetectRange)
+                        for (int i = 0; i < _TargetsPanel.Length; i++)
                         {
-                            isInRange = true;
-                        }
-
-                        RaycastHit hit;
-                        if (Physics.Raycast(transform.position, (_TargetsPanel[i].transform.position - transform.position), out hit, Mathf.Infinity))
-                        {
-                            if (hit.transform == _TargetsPanel[i].transform)
+                            isInRange = false;
+                            isNotHidden = false;
+                            if (Vector3.Distance(transform.position, _TargetsPanel[i].transform.position) < DetectRange)
                             {
-                                isNotHidden = true;
+                                isInRange = true;
                             }
-                        }
 
-                        if (isInRange && isNotHidden)
-                        {
-                            telecomandeSource.Play();
-                            _TargetsPanel[i].activation();
+                            RaycastHit hit;
+                            if (Physics.Raycast(transform.position, (_TargetsPanel[i].transform.position - transform.position), out hit, Mathf.Infinity))
+                            {
+                                if (hit.transform == _TargetsPanel[i].transform)
+                                {
+                                    isNotHidden = true;
+                                }
+                            }
+
+                            if (isInRange && isNotHidden)
+                            {
+                                telecomandeSource.Play();
+                                _TargetsPanel[i].activation();
+                            }
                         }
                     }
                     break;
