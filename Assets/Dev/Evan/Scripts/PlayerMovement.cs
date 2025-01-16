@@ -129,25 +129,55 @@ public class PlayerMovement : MonoBehaviour
             fullText.text = "- Goodbye";
         }
 
-        if (haveJetpack)
+        switch (zone)
         {
-            imageobject1.SetActive(true);
-            imageobject2.SetActive(false);
-            imageobject3.SetActive(false);
-        }
-
-        if (haveTelecommande)
-        {
-            imageobject1.SetActive(false);
-            imageobject2.SetActive(true);
-            imageobject3.SetActive(false);
-        }
-
-        if (haveLight)
-        {
-            imageobject1.SetActive(false);
-            imageobject2.SetActive(false);
-            imageobject3.SetActive(true);
+            case 0:
+                imageobject1.SetActive(false);
+                imageobject2.SetActive(false);
+                imageobject3.SetActive(false);
+                break;
+            case 1:
+                if (haveTelecommande)
+                {
+                    imageobject1.SetActive(false);
+                    imageobject2.SetActive(false);
+                    imageobject3.SetActive(true);
+                }
+                else
+                {
+                    imageobject1.SetActive(false);
+                    imageobject2.SetActive(false);
+                    imageobject3.SetActive(false);
+                }
+                break;
+            case 2:
+                if (haveLight)
+                {
+                    imageobject1.SetActive(false);
+                    imageobject2.SetActive(true);
+                    imageobject3.SetActive(false);
+                }
+                else
+                {
+                    imageobject1.SetActive(false);
+                    imageobject2.SetActive(false);
+                    imageobject3.SetActive(false);
+                }
+                break;
+            case 3:
+                if (haveJetpack)
+                {
+                    imageobject1.SetActive(true);
+                    imageobject2.SetActive(false);
+                    imageobject3.SetActive(false);
+                }
+                else
+                {
+                    imageobject1.SetActive(false);
+                    imageobject2.SetActive(false);
+                    imageobject3.SetActive(false);
+                }
+                break;
         }
     }
 
