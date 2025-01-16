@@ -12,6 +12,7 @@ public class AIControler : MonoBehaviour
     public float timeToRotate = 2;
     public float speedWalk = 6;
     public float speedRun = 9;
+    public Vector3 targetRotation;
 
     public LayerMask playerMask;
     public LayerMask obstacleMask;
@@ -112,6 +113,9 @@ public class AIControler : MonoBehaviour
     }
     private void Patroling()
     {
+        
+        Quaternion desiredRotation = Quaternion.Euler(targetRotation);
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 5f);
         if (m_PlayerNear)
         {
             if (m_TimeToRotate <= 0)
