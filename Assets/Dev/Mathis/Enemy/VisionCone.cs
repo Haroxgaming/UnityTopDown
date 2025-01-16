@@ -28,41 +28,49 @@ public class VisionCone : MonoBehaviour
 
     void DrawVisionCone()
     {
-	int[] triangles = new int[(VisionConeResolution - 1) * 3];
-    	Vector3[] Vertices = new Vector3[VisionConeResolution + 1];
-        Vertices[0] = Vector3.zero;
-        float Currentangle = -VisionAngle / 2;
-        float angleIcrement = VisionAngle / (VisionConeResolution - 1);
-        float Sine;
-        float Cosine;
+        int[] triangles = new int[(VisionConeResolution - 1) * 3];
+        Vector3[] vertices = new Vector3[VisionConeResolution + 1];
+        vertices[0] = Vector3.zero; // Base du cône à l'origine (espace local)
+
+        float currentAngle = -VisionAngle / 2;
+        float angleIncrement = VisionAngle / (VisionConeResolution - 1);
 
         for (int i = 0; i < VisionConeResolution; i++)
         {
-            Sine = Mathf.Sin(Currentangle);
-            Cosine = Mathf.Cos(Currentangle);
-            Vector3 RaycastDirection = (transform.forward * Cosine) + (transform.right * Sine);
-            Vector3 VertForward = (Vector3.forward * Cosine) + (Vector3.right * Sine);
-            if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
+            // Calcul direction du rayon en espace monde
+            float sine = Mathf.Sin(currentAngle);
+            float cosine = Mathf.Cos(currentAngle);
+            Vector3 raycastDirection = (transform.forward * cosine) + (transform.right * sine);
+
+            // Effectuer le raycast
+            if (Physics.Raycast(transform.position, raycastDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
-                Vertices[i + 1] = VertForward * hit.distance;
+                // Convertir en espace local
+                vertices[i + 1] = transform.InverseTransformPoint(hit.point);
             }
             else
             {
-                Vertices[i + 1] = VertForward * VisionRange;
+                // Si pas d'obstacle, placer au bout du cône (en espace local)
+                Vector3 endPoint = transform.position + raycastDirection * VisionRange;
+                vertices[i + 1] = transform.InverseTransformPoint(endPoint);
             }
 
-
-            Currentangle += angleIcrement;
+            currentAngle += angleIncrement;
         }
+
+        // Générer les triangles du mesh
         for (int i = 0, j = 0; i < triangles.Length; i += 3, j++)
         {
             triangles[i] = 0;
             triangles[i + 1] = j + 1;
             triangles[i + 2] = j + 2;
         }
+
+        // Mise à jour du mesh
         VisionConeMesh.Clear();
-        VisionConeMesh.vertices = Vertices;
+        VisionConeMesh.vertices = vertices;
         VisionConeMesh.triangles = triangles;
+        VisionConeMesh.RecalculateNormals();
         MeshFilter_.mesh = VisionConeMesh;
     }
 }
