@@ -32,6 +32,13 @@ public class LightSphere : MonoBehaviour
                 {
                     ActivateThisSphere();
                 }
+                else
+                {
+                    foreach (var sphere in _NeedForActivate)
+                    {
+                        sphere.reset();
+                    }
+                }
             }
         }
         
