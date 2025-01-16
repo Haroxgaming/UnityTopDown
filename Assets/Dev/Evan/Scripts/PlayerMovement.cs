@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public Image imagePart1;
     public Image imagePart2;
     public Image imagePart3;
+    public GameObject imageobject1;
+    public GameObject imageobject2;
+    public GameObject imageobject3;
     YieldInstruction wait = new WaitForSeconds(5.0f);
     public AudioSource musiqueSource;
 
@@ -123,6 +126,27 @@ public class PlayerMovement : MonoBehaviour
         {
             textPart.text = " ";
             fullText.text = "- Goodbye";
+        }
+
+        if (haveJetpack)
+        {
+            imageobject1.SetActive(true);
+            imageobject2.SetActive(false);
+            imageobject3.SetActive(false);
+        }
+
+        if (haveTelecommande)
+        {
+            imageobject1.SetActive(false);
+            imageobject2.SetActive(true);
+            imageobject3.SetActive(false);
+        }
+
+        if (haveLight)
+        {
+            imageobject1.SetActive(false);
+            imageobject2.SetActive(false);
+            imageobject3.SetActive(true);
         }
     }
 

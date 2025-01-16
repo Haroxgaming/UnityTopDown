@@ -56,6 +56,10 @@ MonoBehaviour:
   imagePart1: {fileID: 4483158622174486853}
   imagePart2: {fileID: 8757797306310680148}
   imagePart3: {fileID: 4785410586488697115}
+  imageobject1: {fileID: 5982051130810730423}
+  imageobject2: {fileID: 5625040588017815875}
+  imageobject3: {fileID: 6583760008908303788}
+  musiqueSource: {fileID: 0}
   moveSpeed: 7
   groundDrag: 5
   airMultiplier: 0.2
@@ -650,6 +654,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5625040588017815875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3458160365463499620, guid: 25c7ef7b7c084d243b63f64eb80c674f, type: 3}
+  m_PrefabInstance: {fileID: 7056562389209948711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5982051130810730423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3668588527757501840, guid: 25c7ef7b7c084d243b63f64eb80c674f, type: 3}
+  m_PrefabInstance: {fileID: 7056562389209948711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6583760008908303788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4229940819401592715, guid: 25c7ef7b7c084d243b63f64eb80c674f, type: 3}
+  m_PrefabInstance: {fileID: 7056562389209948711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8757797306310680148 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1757529912450284659, guid: 25c7ef7b7c084d243b63f64eb80c674f, type: 3}
