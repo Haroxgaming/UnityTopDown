@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public Image imagePart2;
     public Image imagePart3;
     YieldInstruction wait = new WaitForSeconds(5.0f);
+    public AudioSource musiqueSource;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -120,8 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (numberPart == 0)
         {
-            wait = new WaitForSeconds(5.0f);
-            textPart.text = "";
+            textPart.text = " ";
             fullText.text = "- Goodbye";
         }
     }
@@ -184,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
                 case 3:
                     if (haveJetpack && _fireInput != 0 && jetpackReload)
                     {
+                        musiqueSource.Play();
                         _moveDirection.Set(_verticalInput, _fireInput, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
                         var pos = transform.position;
@@ -193,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
                         if (jetpackTimer <= 0)
                         {
                             jetpackReload = false;
+                            musiqueSource.Stop();
                         }
                     }
                     else if (transform.position.y < 1.7f)
@@ -200,11 +202,13 @@ public class PlayerMovement : MonoBehaviour
                         _moveDirection.Set(_verticalInput, 0, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
 						jetpackReload = false;
+                        musiqueSource.Stop();
                     }
                     else
                     {
                         _moveDirection.Set(_verticalInput, -1, _horizontalInput);
                         _rb.linearVelocity = _moveDirection * moveSpeed;
+                        musiqueSource.Stop();
                     }
                     break;
             }
