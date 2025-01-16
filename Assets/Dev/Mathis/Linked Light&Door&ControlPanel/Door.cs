@@ -12,6 +12,15 @@ public class Door : MonoBehaviour
     private Vector3 temp;
     public bool activated;
     public Vector3 minPos, maxPos;
+
+    void Start()
+    {
+        if (activated)
+        {
+            temp = minPos;
+            minPos = maxPos;
+        }
+    }
     public void open()
     {
         if (activated)

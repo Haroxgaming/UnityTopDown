@@ -173,6 +173,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnFootstep(AnimationEvent animationEvent)
+    {
+        
+    }
     private void MyInput()
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
