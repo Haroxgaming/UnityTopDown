@@ -452,6 +452,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (part1 && part3 && part2)
         {
+            Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
             SceneManager.LoadScene(2);
         }
     }
